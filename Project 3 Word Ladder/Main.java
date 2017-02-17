@@ -37,11 +37,10 @@ public class Main {
 		ArrayList<String> words = parse(kb);
 		while (words.size() != 0) {
 			if (words.size() == 2) {
-				String start = words.get(0).toUpperCase();
-				String end = words.get(1).toUpperCase();
-				if (dict.contains(start) == true && dict.contains(end) == true) {
+				String start = words.get(0);
+				String end = words.get(1);
+				if (dict.contains(start.toUpperCase()) == true && dict.contains(end.toUpperCase()) == true) {
 					ArrayList<String> ladderDFS = getWordLadderDFS(start, end);
-					System.out.println(ladderDFS);
 					//ArrayList<String> ladderBFS = getWordLadderBFS(start, end);
 					//printLadder(ladderDFS);
 					//printLadder(ladderBFS);
@@ -74,7 +73,7 @@ public class Main {
 	public static ArrayList<String> getWordLadderDFS(String start, String end) {
 		ArrayList<String> ladder = new ArrayList<String>();
 		DFS programDFS = new DFS(dict);
-		if (programDFS.recursivesearch(start, end)) {
+		if (programDFS.recursivesearch(start.toUpperCase(), end.toUpperCase())) {
 			for (int i = programDFS.ladderMap.size() - 1; i >= 0; i--) {
 				ladder.add(programDFS.nodeVal.get(programDFS.ladderMap.get(i)));
 			}
