@@ -1,9 +1,8 @@
 /* WORD LADDER Main.java
  * EE422C Project 3 submission by
- * Replace <...> with your actual data.
- * <Student1 Name>
- * <Student1 EID>
- * <Student1 5-digit Unique No.>
+ * Ho-chang Chang
+ * hc23882
+ * 16220
  * <Student2 Name>
  * <Student2 EID>
  * <Student2 5-digit Unique No.>
@@ -19,7 +18,7 @@ import java.io.*;
 
 public class Main {
 	
-	// static variables and constants only here.
+	static Set<String> dict;
 	
 	public static void main(String[] args) throws Exception {
 		
@@ -35,14 +34,25 @@ public class Main {
 			ps = System.out;			// default to Stdout
 		}
 		initialize();
-		
-		// TODO methods to read in words, output ladder
+		ArrayList<String> words = parse(kb);
+		while (words.size() != 0) {
+			if (words.size() == 2) {
+				String start = words.get(0).toUpperCase();
+				String end = words.get(1).toUpperCase();
+				if (dict.contains(start) == true && dict.contains(end) == true) {
+					ArrayList<String> ladderDFS = getWordLadderDFS(start, end);
+					System.out.println(ladderDFS);
+					//ArrayList<String> ladderBFS = getWordLadderBFS(start, end);
+					//printLadder(ladderDFS);
+					//printLadder(ladderBFS);
+				}
+			}
+			words = parse(kb);
+		}
 	}
 	
 	public static void initialize() {
-		// initialize your static variables or constants here.
-		// We will call this method before running our JUNIT tests.  So call it 
-		// only once at the start of main.
+		dict = makeDictionary();
 	}
 	
 	/**
@@ -51,35 +61,38 @@ public class Main {
 	 * If command is /quit, return empty ArrayList. 
 	 */
 	public static ArrayList<String> parse(Scanner keyboard) {
-		// TO DO
-		return null;
+		ArrayList<String> input = new ArrayList<String>();
+		String word = keyboard.next();
+		if (word.equals("/quit") == false) {
+			input.add(word);
+			word = keyboard.next();
+			input.add(word);
+		}
+		return input;
 	}
 	
 	public static ArrayList<String> getWordLadderDFS(String start, String end) {
-		
-		// Returned list should be ordered start to end.  Include start and end.
-		// Return empty list if no ladder.
-		// TODO some code
-		Set<String> dict = makeDictionary();
-		// TODO more code
-		
-		return null; // replace this line later with real return
+		ArrayList<String> ladder = new ArrayList<String>();
+		DFS programDFS = new DFS(dict);
+		if (programDFS.recursivesearch(start, end)) {
+			for (int i = programDFS.ladderMap.size() - 1; i >= 0; i--) {
+				ladder.add(programDFS.nodeVal.get(programDFS.ladderMap.get(i)));
+			}
+		}
+		return ladder;
 	}
 	
     public static ArrayList<String> getWordLadderBFS(String start, String end) {
-		
-		// TODO some code
-		Set<String> dict = makeDictionary();
-		// TODO more code
-		
-		return null; // replace this line later with real return
+    
+		return null;
 	}
     
 	public static Set<String>  makeDictionary () {
 		Set<String> words = new HashSet<String>();
 		Scanner infile = null;
 		try {
-			infile = new Scanner (new File("five_letter_words.txt"));
+			// infile = new Scanner (new File("five_letter_words.txt"));
+			infile = new Scanner (new File("C:/Users/ERICHC7/Documents/Eclipse/Project3/src/assignment3/five_letter_words.txt"));
 		} catch (FileNotFoundException e) {
 			System.out.println("Dictionary File not Found!");
 			e.printStackTrace();
