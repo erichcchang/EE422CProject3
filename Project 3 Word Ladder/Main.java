@@ -3,11 +3,11 @@
  * Ho-chang Chang
  * hc23882
  * 16220
- * <Student2 Name>
- * <Student2 EID>
- * <Student2 5-digit Unique No.>
+ * Phyllis Ang
+ * pya74
+ * 16220
  * Slip days used: <0>
- * Git URL:
+ * Git URL: https://github.com/erichcchang/EE422CProject3
  * Spring 2017
  */
 
