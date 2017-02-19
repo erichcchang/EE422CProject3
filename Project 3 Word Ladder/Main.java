@@ -42,7 +42,7 @@ public class Main {
 				if (dict.contains(start.toUpperCase()) == true && dict.contains(end.toUpperCase()) == true) {
 					ArrayList<String> ladderDFS = getWordLadderDFS(start, end);
 					//ArrayList<String> ladderBFS = getWordLadderBFS(start, end);
-					//printLadder(ladderDFS);
+					printLadder(ladderDFS);
 					//printLadder(ladderBFS);
 				}
 			}
@@ -71,12 +71,10 @@ public class Main {
 	}
 	
 	public static ArrayList<String> getWordLadderDFS(String start, String end) {
-		ArrayList<String> ladder = new ArrayList<String>();
+		ArrayList<String> ladder = new ArrayList<String>(); //empty ladder
 		DFS programDFS = new DFS(dict);
-		if (programDFS.recursivesearch(start.toUpperCase(), end.toUpperCase())) {
-			for (int i = programDFS.ladderMap.size() - 1; i >= 0; i--) {
-				ladder.add(programDFS.nodeVal.get(programDFS.ladderMap.get(i)));
-			}
+		if (programDFS.recursivesearch(start.toUpperCase(), end.toUpperCase())) { // if word ladder exists
+			ladder = programDFS.ladder;
 		}
 		return ladder;
 	}
@@ -109,7 +107,10 @@ public class Main {
 		String end = ladder.get(ladder.size()-1);
 		
 
-		if(start.equals(end) && !similarLetter(start, end)){
+		if(start.equals(end)){
+			System.out.println("no word ladder can be found between "+start+" and "+end+".");
+		}
+		else if(!similarLetter(start, end)){
 			System.out.println("no word ladder can be found between "+start+" and "+end+".");
 		}
 		//if(!start.equals(end))
@@ -118,10 +119,10 @@ public class Main {
 			for(int i = 0; i<ladder.size(); i++){
 				System.out.println(ladder.get(i));
 			}
-		}		
+		}
+
+		
 	}
-	// TODO
-	// Other private static methods here
 	
 	public static boolean similarLetter(String start, String end){
 		char[] startChar = start.toCharArray();
