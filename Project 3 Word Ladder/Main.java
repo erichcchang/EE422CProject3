@@ -109,10 +109,7 @@ public class Main {
 		String end = ladder.get(ladder.size()-1);
 		
 
-		if(start.equals(end)){
-			System.out.println("no word ladder can be found between "+start+" and "+end+".");
-		}
-		else if(!similarLetter(start, end)){
+		if(start.equals(end) && !similarLetter(start, end)){
 			System.out.println("no word ladder can be found between "+start+" and "+end+".");
 		}
 		//if(!start.equals(end))
@@ -121,9 +118,7 @@ public class Main {
 			for(int i = 0; i<ladder.size(); i++){
 				System.out.println(ladder.get(i));
 			}
-		}
-
-		
+		}		
 	}
 	// TODO
 	// Other private static methods here
