@@ -117,17 +117,18 @@ public class Main {
 		String start = ladder.get(0);
 		String end = ladder.get(ladder.size()-1);
 		
-		//if a word ladder cannot be found between them 
-		if(start.equals(end) && !similarLetter(start, end)){
-			System.out.println("no word ladder can be found between "+start+" and "+end+".");
+		//if a word ladder cannot found 
+		if(numWords <=0 ){
+			System.out.println("no word ladder can be found between "+start.toLowerCase()+" and "+end.toLowerCase()+".");
 		}
-		//if a ladder exists between the words - print out the ladder
+
+		//if a word ladder can be found, print the entire ladder
 		else{
-			System.out.println("a "+numWords+"-rung word ladder exists between "+start+" and "+end+".");
+			System.out.println("a "+numWords+"-rung word ladder exists between "+start.toLowerCase()+" and "+end.toLowerCase()+".");
 			for(int i = 0; i<ladder.size(); i++){
 				System.out.println(ladder.get(i));
 			}
-		}	
+		}		
 	}
 
 
