@@ -88,8 +88,8 @@ public class Main {
 		Set<String> words = new HashSet<String>();
 		Scanner infile = null;
 		try {
-			// infile = new Scanner (new File("five_letter_words.txt"));
-			infile = new Scanner (new File("C:/Users/ERICHC7/Documents/Eclipse/Project3/src/assignment3/five_letter_words.txt"));
+			infile = new Scanner (new File("five_letter_words.txt"));
+			//infile = new Scanner (new File("C:/Users/ERICHC7/Documents/Eclipse/Project3/src/assignment3/five_letter_words.txt"));
 		} catch (FileNotFoundException e) {
 			System.out.println("Dictionary File not Found!");
 			e.printStackTrace();
@@ -101,33 +101,43 @@ public class Main {
 		return words;
 	}
 	
+	/**
+	 * This function prints out the number of rungs in the ladder and the ladder itself if it exist
+	 * Prints out that a word ladder cannot be found if no ladder exist 
+	 * @param ladder to be displayed 
+	 * 
+	 */
 	public static void printLadder(ArrayList<String> ladder) {
 		int numWords = ladder.size()-2;
 		String start = ladder.get(0);
 		String end = ladder.get(ladder.size()-1);
 		
-
-		if(start.equals(end)){
+		//if a word ladder cannot be found between them 
+		if(start.equals(end) && !similarLetter(start, end)){
 			System.out.println("no word ladder can be found between "+start+" and "+end+".");
 		}
-		else if(!similarLetter(start, end)){
-			System.out.println("no word ladder can be found between "+start+" and "+end+".");
-		}
-		//if(!start.equals(end))
+		//if a ladder exists between the words - print out the ladder
 		else{
 			System.out.println("a "+numWords+"-rung word ladder exists between "+start+" and "+end+".");
 			for(int i = 0; i<ladder.size(); i++){
 				System.out.println(ladder.get(i));
 			}
-		}
-
-		
+		}	
 	}
-	
+
+
+	/**
+	 * This function checks to see if start and end differ from each other by one ladder
+	 * @param start is the first word in the word ladder
+	 * @param end is the last word in the word ladder
+	 * @return boolean value of whether start and end differ from each other by one letter
+	 */
 	public static boolean similarLetter(String start, String end){
 		char[] startChar = start.toCharArray();
 		char[] endChar = end.toCharArray();
-		int num_difference = 0;
+		int num_difference = 0; //keeps track of how many letters are similar between the two words 
+
+		//compare each char in the word 
 		for (int i = 0; i<startChar.length; i++){
 			if(startChar[i] == endChar[i]){
 				num_difference++;

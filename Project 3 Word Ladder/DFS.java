@@ -17,7 +17,7 @@ public class DFS {
 	}
 	
 	void genNeighbors(String node) { //generates unexplored neighbors of node
-		for (int l = 0; l < 5; l++) { //for each letter in five-letter word
+		for (int l = 0; l < word.length(); l++) { //for each letter in the word
 			char[] word = node.toCharArray();
 			for (int a = 0; a < 26; a++) { // try every word a letter away
 				word[l] = (char) (a + 65);
