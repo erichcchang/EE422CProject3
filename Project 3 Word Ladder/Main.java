@@ -118,15 +118,20 @@ public class Main {
 		String end = ladder.get(ladder.size()-1);
 		
 		//if a word ladder cannot found 
-		if(numWords <=0 ){
+		if(numWords <=0 && !start.equals(end)){
 			System.out.println("no word ladder can be found between "+start.toLowerCase()+" and "+end.toLowerCase()+".");
 		}
 
 		//if a word ladder can be found, print the entire ladder
 		else{
+			//if start and end words are the same 
+			if(start.equals(end)){
+				numWords = 0;
+				ladder.add(start);
+			}
 			System.out.println("a "+numWords+"-rung word ladder exists between "+start.toLowerCase()+" and "+end.toLowerCase()+".");
 			for(int i = 0; i<ladder.size(); i++){
-				System.out.println(ladder.get(i));
+				System.out.println(ladder.get(i).toLowerCase());
 			}
 		}		
 	}
