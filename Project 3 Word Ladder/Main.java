@@ -71,12 +71,16 @@ public class Main {
 	}
 	
 	public static ArrayList<String> getWordLadderDFS(String start, String end) {
-		ArrayList<String> ladder = new ArrayList<String>(); //empty ladder
 		DFS programDFS = new DFS(dict);
-		if (programDFS.recursivesearch(start.toUpperCase(), end.toUpperCase())) { // if word ladder exists
-			ladder = programDFS.ladder;
+		if (programDFS.recursivesearch(start.toUpperCase(), end.toUpperCase()) && programDFS.ladder.size() > 1) { // if word ladder exists
+			return programDFS.ladder;
 		}
-		return ladder;
+		else {
+			ArrayList<String> ladder = new ArrayList<String>();
+			ladder.add(start);
+			ladder.add(end);
+			return ladder;
+		}
 	}
 	
     public static ArrayList<String> getWordLadderBFS(String start, String end) {
