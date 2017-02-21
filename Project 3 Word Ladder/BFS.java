@@ -139,6 +139,9 @@ public class BFS {
 			list.add(start);
 			list.add(end);
 		}
+		if (list.size() == 1) { // if start == end
+			list.add(end);
+		}
 		return list;
 	}
 }

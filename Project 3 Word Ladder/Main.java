@@ -39,11 +39,11 @@ public class Main {
 			if (words.size() == 2) {
 				String start = words.get(0);
 				String end = words.get(1);
-				if (dict.contains(start.toUpperCase()) == true && dict.contains(end.toUpperCase()) == true) {
+				if (dict.contains(start.toUpperCase()) && dict.contains(end.toUpperCase())) {
 					ArrayList<String> ladderDFS = getWordLadderDFS(start, end);
-					//ArrayList<String> ladderBFS = getWordLadderBFS(start, end);
+					ArrayList<String> ladderBFS = getWordLadderBFS(start, end);
 					printLadder(ladderDFS);
-					//printLadder(ladderBFS);
+					printLadder(ladderBFS);
 				}
 			}
 			words = parse(kb);
@@ -61,22 +61,33 @@ public class Main {
 	 */
 	public static ArrayList<String> parse(Scanner keyboard) {
 		ArrayList<String> input = new ArrayList<String>();
-		String word = keyboard.next();
-		if (word.equals("/quit") == false) {
+		String line = keyboard.nextLine();
+		Scanner parser = new Scanner(line);
+		int count = 0;
+		while (parser.hasNext() && count < 2) {
+			String word = parser.next();
+			if (word.equals("/quit")) {
+				parser.close();
+				return new ArrayList<String>();
+			}
 			input.add(word);
-			word = keyboard.next();
-			input.add(word);
+			count++;
 		}
+		parser.close();
 		return input;
 	}
 	
 	public static ArrayList<String> getWordLadderDFS(String start, String end) {
-		DFS programDFS = new DFS(dict);
-		if (programDFS.recursivesearch(start.toUpperCase(), end.toUpperCase()) && programDFS.ladder.size() > 1) { // if word ladder exists
-			return programDFS.ladder;
+		if (start.equals("/quit") || end.equals("/quit")) {
+			return null;
 		}
+		DFS programDFS = new DFS(dict);
+		if (programDFS.recursivesearch(start.toUpperCase(), end.toUpperCase()) && programDFS.ladder.size() > 1) {
+			return programDFS.ladder; // if word ladder exists and more than one word
+		}
+		
 		else {
-			ArrayList<String> ladder = new ArrayList<String>();
+			ArrayList<String> ladder = new ArrayList<String>(); // if start and end are the same or ladder DNE
 			ladder.add(start);
 			ladder.add(end);
 			return ladder;
@@ -84,17 +95,16 @@ public class Main {
 	}
 	
     public static ArrayList<String> getWordLadderBFS(String start, String end) {
-    	ArrayList<String> BFSLadder = new ArrayList<String>();
-    	BFS BFSList = new BFS(dict);    	    	
-		return BFSList.getShortestPath(start.toUpperCase(), end.toUpperCase());
+    	BFS BFSList = new BFS(dict);
+    	return BFSList.getShortestPath(start.toUpperCase(), end.toUpperCase());
 	}
     
 	public static Set<String>  makeDictionary () {
 		Set<String> words = new HashSet<String>();
 		Scanner infile = null;
 		try {
-			infile = new Scanner (new File("five_letter_words.txt"));
-			//infile = new Scanner (new File("C:/Users/ERICHC7/Documents/Eclipse/Project3/src/assignment3/five_letter_words.txt"));
+			//infile = new Scanner (new File("five_letter_words.txt"));
+			infile = new Scanner (new File("C:/Users/ERICHC7/Documents/Eclipse/Project3/src/assignment3/five_letter_words.txt"));
 		} catch (FileNotFoundException e) {
 			System.out.println("Dictionary File not Found!");
 			e.printStackTrace();
@@ -124,11 +134,6 @@ public class Main {
 
 		//if a word ladder can be found, print the entire ladder
 		else{
-			//if start and end words are the same 
-			if(start.equals(end)){
-				numWords = 0;
-				ladder.add(start);
-			}
 			System.out.println("a "+numWords+"-rung word ladder exists between "+start.toLowerCase()+" and "+end.toLowerCase()+".");
 			for(int i = 0; i<ladder.size(); i++){
 				System.out.println(ladder.get(i).toLowerCase());
@@ -154,7 +159,6 @@ public class Main {
 				num_difference++;
 			}
 		}
-		
 		return num_difference == start.length()-1;
 	}
 }

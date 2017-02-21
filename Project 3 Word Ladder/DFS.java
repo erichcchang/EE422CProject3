@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 public class DFS {
+	
 	ArrayList<String> dict; // dictionary of unexplored nodes
 	ArrayList<String> nodeVal; // DFS node visiting order
 	ArrayList<String> ladder; //word ladder
@@ -16,13 +17,13 @@ public class DFS {
 		neighborList = new ArrayList<ArrayList<String>>();
 	}
 	
-	void genNeighbors(String node) { //generates unexplored neighbors of node
-		for (int l = 0; l < word.length(); l++) { //for each letter in the word
+	public void genNeighbors(String node) { //generates unexplored neighbors of node
+		for (int l = 0; l < node.length(); l++) { //for each letter in the word
 			char[] word = node.toCharArray();
 			for (int a = 0; a < 26; a++) { // try every word a letter away
 				word[l] = (char) (a + 65);
 				String wordString = new String(word);
-				if (wordString.equals(node) == false) { // in closed neighborhood
+				if (!wordString.equals(node)) { // in closed neighborhood
 					int index = dict.indexOf(wordString);
 					if (index != -1) { // check if valid word
 						neighborList.get(neighborList.size() - 1).add(dict.get(index));
@@ -33,7 +34,7 @@ public class DFS {
 		}
 	}
 	
-	boolean recursivesearch (String first, String last) { //start from last
+	public boolean recursivesearch (String first, String last) { //start from last
 		if (last.equals(first)) { // if node reaches desired word
 			dict.remove(first);
 			nodeVal.add(first);
