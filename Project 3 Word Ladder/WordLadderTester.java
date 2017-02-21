@@ -1,4 +1,15 @@
-
+/* WORD LADDER Main.java
+ * EE422C Project 3 submission by
+ * Ho-chang Chang
+ * hc23882
+ * 16220
+ * Phyllis Ang
+ * pya74
+ * 16220
+ * Slip days used: <0>
+ * Git URL: https://github.com/erichcchang/EE422CProject3
+ * Spring 2017
+ */
 package assignment3;
 
 import static org.junit.Assert.assertEquals;
