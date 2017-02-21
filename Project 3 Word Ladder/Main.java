@@ -103,8 +103,8 @@ public class Main {
 		Set<String> words = new HashSet<String>();
 		Scanner infile = null;
 		try {
-			//infile = new Scanner (new File("five_letter_words.txt"));
-			infile = new Scanner (new File("C:/Users/ERICHC7/Documents/Eclipse/Project3/src/assignment3/five_letter_words.txt"));
+			infile = new Scanner (new File("five_letter_words.txt"));
+			//infile = new Scanner (new File("C:/Users/ERICHC7/Documents/Eclipse/Project3/src/assignment3/five_letter_words.txt"));
 		} catch (FileNotFoundException e) {
 			System.out.println("Dictionary File not Found!");
 			e.printStackTrace();

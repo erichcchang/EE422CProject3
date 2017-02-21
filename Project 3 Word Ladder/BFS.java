@@ -119,6 +119,10 @@ public class BFS {
 	 */
 	public ArrayList<String> getShortestPath(String start, String end){
 		ArrayList<String> list = new ArrayList<String>();
+
+		if(start.equals("/quit") || end.equals("/quit")){
+			return null;
+		}
 		Node last = BFS_Search(start, end); //search for the node that end was stored in
 
 		//traverse through parent nodes to construct list if the last node exist
@@ -137,9 +141,6 @@ public class BFS {
 		//if no last node exist add the start and end word to the list
 		else{
 			list.add(start);
-			list.add(end);
-		}
-		if (list.size() == 1) { // if start == end
 			list.add(end);
 		}
 		return list;
