@@ -97,6 +97,11 @@ public class BFS {
 			else{
 				ArrayList<Node> neighbor = getNeighbors(current);
 
+				//if current node has no neighbors then no ladder exist
+				if(neighbor == null){
+					return null;
+				}
+
 				for(int i = 0; i<neighbor.size(); i++){
 					//check if each neighbor has been visited 
 					if(!neighbor.get(i).visited){
