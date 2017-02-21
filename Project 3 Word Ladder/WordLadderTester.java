@@ -114,6 +114,11 @@ public class WordLadderTester {
 		Main.printLadder(res);
 		String str = outContent.toString().replace("\n", "").replace(".", "").trim();
 		assertEquals("no word ladder can be found between twixt and hakus", str);
+		res = Main.getWordLadderBFS("hands", "hands");
+		outContent.reset();
+		Main.printLadder(res);
+		String str = outContent.toString().replace("\n", "").replace(".", "").trim();
+		assertEquals("a 0-rung ladder exists between hands and handshandshands", str);
 	}
 
 	@Test(timeout = 30000)
@@ -143,24 +148,40 @@ public class WordLadderTester {
 	@Test(timeout = 30000)
 	public void testBFSQuit(){
 		ArrayList<String> res = Main.getWordLadderBFS("/quit", "owner");
-		
-		if (res != null) {
-			HashSet<String> set = new HashSet<String>(res);
-			assertEquals(set.size(), res.size());
-		}
-		
-		assertFalse(res == null || res.size() == 0);
+		assertTrue(res == null);
+		res = Main.getWordLadderBFS("heath", "/quit");
+		assertTrue(res == null);
+		res = Main.getWordLadderBFS("/quit", "/quit");
+		assertTrue(res == null);
 	}
 
 	@Test(timeout = 30000)
 	public void testDFSQuit(){
 		ArrayList<String> res = Main.getWordLadderDFS("/quit", "owner");
-		
-		if (res != null) {
-			HashSet<String> set = new HashSet<String>(res);
-			assertEquals(set.size(), res.size());
-		}
-		
-		assertFalse(res == null || res.size() == 0);
+		assertTrue(res == null);
+		res = Main.getWordLadderDFS("heath", "/quit");
+		assertTrue(res == null);
+		res = Main.getWordLadderDFS("/quit", "/quit");
+		assertTrue(res == null);
+	}
+	@Test(timeout = 30000)
+	public void testParse() {
+		Scanner keyboard = new Scanner(System.in);
+		ArrayList<String> res = parse(keyboard); // enter "/quit"
+		assertTrue(res.size() == 0);
+		res = parse(keyboard); // enter "/quit drags"
+		assertTrue(res.size() == 0);
+		res = parse(keyboard); // enter "drags /quit"
+		assertTrue(res.size() == 0);
+		res = parse(keyboard); // enter "/quit /quit"
+		assertTrue(res.size() == 0);
+		res = parse(keyboard); // enter "money smart"
+		assertTrue(res.size() == 2)
+		assertEquals("money", res.get(0));
+		assertEquals("smart", res.get(1));
+		res = parse(keyboard); // enter "smart money"
+		assertTrue(res.size() == 2)
+		assertEquals("smart", res.get(0));
+		assertEquals("money", res.get(1));
 	}
 }
