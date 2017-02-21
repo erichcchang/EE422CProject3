@@ -130,6 +130,13 @@ public class WordLadderTester {
 		}
 		assertTrue(verifyLadder(res));
 		assertFalse(res == null || res.size() == 0 || res.size() == 2);
+		res = Main.getWordLadderDFS("molds", "heath");
+		if (res != null) {
+			HashSet<String> set = new HashSet<String>(res);
+			assertEquals(set.size(), res.size());
+		}
+		assertTrue(verifyLadder(res));
+		assertFalse(res == null || res.size() == 0 || res.size() == 2);
 	}
 	
 	@Test(timeout = 30000)
@@ -143,6 +150,13 @@ public class WordLadderTester {
 		assertTrue(verifyLadder(res));
 		assertFalse(res == null || res.size() == 0 || res.size() == 2);
 		assertFalse(res.size() < 6);
+		res = Main.getWordLadderDFS("molds", "heath");
+		if (res != null) {
+			HashSet<String> set = new HashSet<String>(res);
+			assertEquals(set.size(), res.size());
+		}
+		assertTrue(verifyLadder(res));
+		assertFalse(res == null || res.size() == 0 || res.size() == 2);
 	}
 
 	@Test(timeout = 30000)
