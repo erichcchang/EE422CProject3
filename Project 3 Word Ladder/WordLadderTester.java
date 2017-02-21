@@ -139,4 +139,28 @@ public class WordLadderTester {
 		assertFalse(res == null || res.size() == 0 || res.size() == 2);
 		assertFalse(res.size() < 6);
 	}
+
+	@Test(timeout = 30000)
+	public void testBFSQuit(){
+		ArrayList<String> res = Main.getWordLadderBFS("/quit", "owner");
+		
+		if (res != null) {
+			HashSet<String> set = new HashSet<String>(res);
+			assertEquals(set.size(), res.size());
+		}
+		
+		assertFalse(res == null || res.size() == 0);
+	}
+
+	@Test(timeout = 30000)
+	public void testDFSQuit(){
+		ArrayList<String> res = Main.getWordLadderDFS("/quit", "owner");
+		
+		if (res != null) {
+			HashSet<String> set = new HashSet<String>(res);
+			assertEquals(set.size(), res.size());
+		}
+		
+		assertFalse(res == null || res.size() == 0);
+	}
 }
