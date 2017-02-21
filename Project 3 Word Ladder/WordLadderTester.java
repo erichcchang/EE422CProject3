@@ -223,4 +223,28 @@ public class WordLadderTester {
 		assertTrue(res1 == null || res1.size() == 0 || res1.size() == 2);
 		
 	}
+
+	@Test(timeout = 30000)
+	public void testDFSCase(){
+		ArrayList<String> res = Main.getWordLadderDFS("OwNeR", "SiTuP");
+		if (res != null) {
+			HashSet<String> set = new HashSet<String>(res);
+			assertEquals(set.size(), res.size());
+		}
+		assertTrue(verifyLadder(res));
+		assertFalse(res == null || res.size() == 0 || res.size() == 2);
+	}
+	
+	@Test(timeout = 30000)
+	public void testBFSCase(){
+		ArrayList<String> res = Main.getWordLadderBFS("DrEaM", "MeOwS");
+
+		if (res != null) {
+			HashSet<String> set = new HashSet<String>(res);
+			assertEquals(set.size(), res.size());
+		}
+		assertTrue(verifyLadder(res));
+		assertFalse(res == null || res.size() == 0 || res.size() == 2);
+		assertFalse(res.size() < 11);
+	}
 }
