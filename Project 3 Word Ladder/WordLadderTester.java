@@ -9,6 +9,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.Set;
 
 import org.junit.BeforeClass;
@@ -117,8 +118,8 @@ public class WordLadderTester {
 		res = Main.getWordLadderBFS("hands", "hands");
 		outContent.reset();
 		Main.printLadder(res);
-		String str = outContent.toString().replace("\n", "").replace(".", "").trim();
-		assertEquals("a 0-rung ladder exists between hands and handshandshands", str);
+		str = outContent.toString().replace("\n", "").replace(".", "").replace("\r", "").trim();
+		assertEquals("a 0-rung word ladder exists between hands and handshandshands", str);
 	}
 
 	@Test(timeout = 30000)
@@ -141,7 +142,7 @@ public class WordLadderTester {
 	
 	@Test(timeout = 30000)
 	public void testLongBFS(){
-		ArrayList<String> res = Main.getWordLadderBFS("dream", "meow");
+		ArrayList<String> res = Main.getWordLadderBFS("dream", "meows");
 
 		if (res != null) {
 			HashSet<String> set = new HashSet<String>(res);
@@ -181,20 +182,20 @@ public class WordLadderTester {
 	@Test(timeout = 30000)
 	public void testParse() {
 		Scanner keyboard = new Scanner(System.in);
-		ArrayList<String> res = parse(keyboard); // enter "/quit"
+		ArrayList<String> res = Main.parse(keyboard); // enter "/quit"
 		assertTrue(res.size() == 0);
-		res = parse(keyboard); // enter "/quit drags"
+		res = Main.parse(keyboard); // enter "/quit drags"
 		assertTrue(res.size() == 0);
-		res = parse(keyboard); // enter "drags /quit"
+		res = Main.parse(keyboard); // enter "drags /quit"
 		assertTrue(res.size() == 0);
-		res = parse(keyboard); // enter "/quit /quit"
+		res = Main.parse(keyboard); // enter "/quit /quit"
 		assertTrue(res.size() == 0);
-		res = parse(keyboard); // enter "money smart"
-		assertTrue(res.size() == 2)
+		res = Main.parse(keyboard); // enter "money smart"
+		assertTrue(res.size() == 2);
 		assertEquals("money", res.get(0));
 		assertEquals("smart", res.get(1));
-		res = parse(keyboard); // enter "smart money"
-		assertTrue(res.size() == 2)
+		res = Main.parse(keyboard); // enter "smart money"
+		assertTrue(res.size() == 2);
 		assertEquals("smart", res.get(0));
 		assertEquals("money", res.get(1));
 	}
